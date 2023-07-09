@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageDescription>Play Economy Inventory microservice</PackageDescription>
+    <Authors>Igor Clemente</Authors>
+    <Company>IGA1</Company>
   </PropertyGroup>
 
 </Project>
