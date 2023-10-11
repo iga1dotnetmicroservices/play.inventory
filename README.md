@@ -35,7 +35,7 @@ MacOS
 ```shell
 export GH_OWNER='iga1dotnetmicroservices'
 export GH_PAT='[PAT HERE]'
-docker build --secret id=GH_OWNER --secret id=GH_PAT -t play.inventory:$version .
+docker build --secret id=GH_OWNER --secret id=GH_PAT -t "$appname.azurecr.io/play.inventory:$version" .
 ```
 
 Windows Shell
@@ -43,7 +43,7 @@ Windows Shell
 ```powershell
 $env:GH_OWNER='iga1dotnetmicroservices'
 $env:GH_PAT='[PAT HERE]'
-docker build --secret id=GH_OWNER --secret id=GH_PAT -t play.inventory:$version .
+docker build --secret id=GH_OWNER --secret id=GH_PAT -t "$appname.azurecr.io/play.inventory:$version" .
 ```
 
 ## Run the docker image
@@ -66,4 +66,23 @@ $cosmosDbConnString='[CONN STRING HERE]'
 $serviceBusConnString='[CONN STRING HERE]'
 
 docker run -it --rm -p 5004:5004 --name inventory -e MongoDbSettings__ConnectionString=$cosmosDbConnString -e ServiceBusSettings__ConnectionString=$serviceBusConnString -e ServiceSettings__Authority=$authority -e ServiceSettings__MessageBroker="SERVICEBUS" play.inventory:$version
+```
+
+## Publishing the Docker image
+
+
+MacOS
+
+```powershell
+appname='playeconomya'
+az acr login --name $appname
+docker push "$appname.azurecr.io/play.inventory:$version"
+```
+
+Windows Shell
+
+```powershell
+$appname='playeconomya'
+az acr login --name $appname
+docker push "$appname.azurecr.io/play.inventory:$version"
 ```
