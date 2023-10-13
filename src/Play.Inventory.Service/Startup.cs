@@ -19,6 +19,7 @@ using Polly;
 using Polly.Timeout;
 using GreenPipes;
 using Play.Inventory.Service.Exceptions;
+using Play.Common.HealthChecks;
 
 namespace Play.Inventory.Service
 {
@@ -53,6 +54,9 @@ namespace Play.Inventory.Service
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Play.Inventory.Service", Version = "v1" });
             });
+
+            services.AddHealthChecks()
+                    .AddMongo();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +86,7 @@ namespace Play.Inventory.Service
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapPlayEconomyHealthChecks();
             });
         }
 
