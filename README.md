@@ -7,7 +7,7 @@ Play Economy Inventory microservice
 MacOS
 
 ```powershell
-version='1.0.3'
+version='1.0.4'
 owner='iga1dotnetmicroservices'
 gh_pat='[PAT HERE]'
 
@@ -19,7 +19,7 @@ dotnet nuget push ../packages/Play.Inventory.Contracts.$version.nupkg --api-key 
 Windows
 
 ```powershell
-$version='1.0.3'
+$version='1.0.4'
 $owner='iga1dotnetmicroservices'
 $gh_pat='[PAT HERE]'
 
