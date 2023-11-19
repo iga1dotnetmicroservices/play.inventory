@@ -145,3 +145,9 @@ Windows
 $IDENTITY_CLIENT_ID=az identity show -g $appname -n $namespace --query clientId -otsv
 az keyvault set-policy -n $appname --secret-permissions get list --spn $IDENTITY_CLIENT_ID
 ```
+
+## Creating the Kubernetes resources
+
+```powershell
+kubectl apply -f ./kubernetes/inventory.yaml -n $namespace
+```
