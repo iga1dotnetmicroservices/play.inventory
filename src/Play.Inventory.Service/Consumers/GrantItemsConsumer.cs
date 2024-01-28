@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 using Play.Common;
 using Play.Inventory.Contracts;
 using Play.Inventory.Service.Entities;
@@ -10,17 +11,27 @@ namespace Play.Inventory.Service.Consumers
 {
     public class GrantItemsConsumer : IConsumer<GrantItems>
     {
+        private readonly ILogger<GrantItemsConsumer> logger;
         private readonly IRepository<InventoryItem> inventoryItemsRepository;
         private readonly IRepository<CatalogItem> catalogItemsRepository;
 
-        public GrantItemsConsumer(IRepository<InventoryItem> inventoryItemsRepository, IRepository<CatalogItem> catalogItemsRepository)
+        public GrantItemsConsumer(IRepository<InventoryItem> inventoryItemsRepository, IRepository<CatalogItem> catalogItemsRepository, ILogger<GrantItemsConsumer> logger)
         {
             this.inventoryItemsRepository = inventoryItemsRepository;
             this.catalogItemsRepository = catalogItemsRepository;
+            this.logger = logger;
         }
 
         public async Task Consume(ConsumeContext<GrantItems> context)
         {
+            logger.LogInformation(
+                "Granting quantity {Quantity} of item {CatalogItemId} to user {UserId} with CorrelationId {CorrelationId}",
+                context.Message.Quantity,
+                context.Message.CatalogItemId,
+                context.Message.UserId,
+                context.Message.CorrelationId
+            );
+
             var message = context.Message;
 
             var item = await catalogItemsRepository.GetAsync(message.CatalogItemId);

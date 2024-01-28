@@ -20,6 +20,7 @@ using Polly.Timeout;
 using GreenPipes;
 using Play.Inventory.Service.Exceptions;
 using Play.Common.HealthChecks;
+using Play.Common.Logging;
 
 namespace Play.Inventory.Service
 {
@@ -57,6 +58,8 @@ namespace Play.Inventory.Service
 
             services.AddHealthChecks()
                     .AddMongo();
+
+            services.AddSeqLogging(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
