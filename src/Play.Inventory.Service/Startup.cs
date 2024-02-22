@@ -17,10 +17,10 @@ using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Entities;
 using Polly;
 using Polly.Timeout;
-using GreenPipes;
 using Play.Inventory.Service.Exceptions;
 using Play.Common.HealthChecks;
 using Play.Common.Logging;
+using MassTransit;
 
 namespace Play.Inventory.Service
 {
