@@ -21,6 +21,7 @@ using Play.Inventory.Service.Exceptions;
 using Play.Common.HealthChecks;
 using Play.Common.Logging;
 using MassTransit;
+using Play.Common.OpenTelementry;
 
 namespace Play.Inventory.Service
 {
@@ -59,7 +60,8 @@ namespace Play.Inventory.Service
             services.AddHealthChecks()
                     .AddMongo();
 
-            services.AddSeqLogging(Configuration);
+            services.AddSeqLogging(Configuration)
+                    .AddTracing(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
